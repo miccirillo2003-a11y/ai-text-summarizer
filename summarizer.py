@@ -1,4 +1,5 @@
-import anthropic
+from groq import Groq
+import os
 
 PROMPTS = {
     "structured": """You are a precise summarization assistant. Given the text below, respond with a structured summary in this exact markdown format:
@@ -30,19 +31,18 @@ Text to summarize:
 
 
 def summarize_text(text: str, format: str = "structured") -> str:
-    client = anthropic.Anthropic()
+    client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 
-    # Truncate very long texts to avoid token limits
     max_chars = 12000
     if len(text) > max_chars:
         text = text[:max_chars] + "\n\n[Text truncated for length]"
 
     prompt = PROMPTS[format].format(text=text)
 
-    message = client.messages.create(
-        model="claude-opus-4-5",
+    response = client.chat.completions.create(
+        model="llama-3.3-70b-versatile",
         max_tokens=1024,
         messages=[{"role": "user", "content": prompt}],
     )
 
-    return message.content[0].text
+    return response.choices[0].message.content
