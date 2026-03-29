@@ -12,8 +12,8 @@ st.set_page_config(
     layout="centered"
 )
 
-st.title("📝 AI Text Summarizer")
-st.caption("Powered by Claude · Paste text, enter a URL, or upload a file")
+st.title("AI Text Summarizer")
+st.caption("Powered by Mic · Paste text, enter a URL, or upload a file")
 
 # --- Format toggle ---
 format_option = st.radio(
