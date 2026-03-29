@@ -67,8 +67,8 @@ with tab3:
 st.divider()
 
 if st.button("✨ Summarize", type="primary", disabled=not input_text):
-    if not os.getenv("ANTHROPIC_API_KEY"):
-        st.error("No ANTHROPIC_API_KEY found. Add it to your .env file.")
+    if not os.getenv("GROQ_API_KEY"):
+        st.error("No GROQ_API_KEY found. Add it to your .env file.")
     else:
         with st.spinner("Summarizing..."):
             try:
